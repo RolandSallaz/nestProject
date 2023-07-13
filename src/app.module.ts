@@ -19,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.POSTGRES_DATABASE || 'postgres',
       entities: [User],
       synchronize: true,
+      ssl: true,
     }),
     UsersModule,
     AuthModule,
