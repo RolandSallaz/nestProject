@@ -11,7 +11,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../users/entities/user.entity';
-import { IToken } from 'src/types';
+import { IToken, IUser } from 'src/types';
 
 @Injectable()
 export class AuthService {
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   private async generateToken({ name, id }: User): Promise<IToken> {
-    const payload = { name, id };
+    const payload: IUser = { name, id };
     return {
       token: this.jwtService.sign(payload),
     };
