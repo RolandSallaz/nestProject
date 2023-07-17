@@ -20,14 +20,7 @@ export class UsersController {
   @ApiResponse({ status: 200, type: [User] })
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.usersService.findAll();
-  }
-  @ApiOperation({ summary: 'Создание пользователя' })
-  @ApiResponse({ status: 201, type: User })
-  @Post()
-  @HttpCode(201)
-  create(@Body() userDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(userDto);
   }
 }

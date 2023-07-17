@@ -17,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.POSTGRES_USER || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'postgres',
       database: process.env.POSTGRES_DATABASE || 'postgres',
-      entities: [User],
+      entities: [__dirname + '/**/*.entity{.js, .ts}'],
       synchronize: true,
       ssl: true,
     }),
