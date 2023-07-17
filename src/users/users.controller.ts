@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,6 +26,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Создание пользователя' })
   @ApiResponse({ status: 201, type: User })
   @Post()
+  @HttpCode(201)
   create(@Body() userDto: CreateUserDto): Promise<User> {
     return this.usersService.create(userDto);
   }

@@ -11,6 +11,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../users/entities/user.entity';
+import { IToken } from 'src/types';
 
 @Injectable()
 export class AuthService {
@@ -19,12 +20,12 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(userDto: CreateUserDto) {
+  async login(userDto: CreateUserDto): Promise<IToken> {
     const user = await this.validateUser(userDto);
     return this.generateToken(user);
   }
 
-  async register(userDto: CreateUserDto) {
+  async register(userDto: CreateUserDto): Promise<IToken> {
     const candidate = await this.userService.getUserByName(userDto.name);
     if (candidate) {
       throw new HttpException(
@@ -37,7 +38,7 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  private async generateToken({ name, id }: User) {
+  private async generateToken({ name, id }: User): Promise<IToken> {
     const payload = { name, id };
     return {
       token: this.jwtService.sign(payload),
