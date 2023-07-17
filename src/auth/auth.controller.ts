@@ -12,6 +12,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Получение списка пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   @Post('login')
+  @HttpCode(200)
   async login(@Body() userDto: CreateUserDto): Promise<IToken> {
     return this.authService.login(userDto);
   }
